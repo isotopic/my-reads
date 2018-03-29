@@ -59,10 +59,9 @@ class SearchBook extends Component{
 		            	{results.length > 0 && (
 
 		            		<ListBooks 
-		            			shelfTitle="Search results"
-				              shelves={shelves}
-				              books={results}
-				              onChangeBookShelf={onChangeBookShelf}
+				             	shelves={shelves}
+				             	books={results}
+				             	onChangeBookShelf={onChangeBookShelf}
 				            />
 
 				          )}
