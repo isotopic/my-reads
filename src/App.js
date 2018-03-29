@@ -36,16 +36,18 @@ class App extends Component {
 
   render() {
 
+    const { books, shelves } = this.state
+
   	return (
 
   		<div className="app">
 
-	  		<Route exact path='/' render={() => (
-	          <MyBooks books={this.state.books} shelves={this.state.shelves} onChangeBookShelf={this.changeBookShelf}/>
-	       )}/>
+        <Route exact path='/' render={() => (
+          <MyBooks books={books} shelves={shelves} onChangeBookShelf={this.changeBookShelf}/>
+        )}/>
 
-        <Route path='/search' render={({ history }) => (
-          <SearchBook/>
+        <Route path='/search' render={() => (
+          <SearchBook books={books} shelves={shelves} onChangeBookShelf={this.changeBookShelf}/>
         )}/>
 
 	    </div>
