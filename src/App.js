@@ -46,7 +46,11 @@ class App extends Component {
     if(query.length > 2){
       this.setState({ 'isLoading': true });
       BooksAPI.search(query).then((results) => {
-        this.setState({ 'results': this.mapResults(results, this.state.books), 'isLoading': false })
+        if(results.error){
+          this.setState({ 'results': [], 'isLoading': false })
+        }else{
+          this.setState({ 'results': this.mapResults(results, this.state.books), 'isLoading': false })
+        }
       })
     }
   }
@@ -54,7 +58,7 @@ class App extends Component {
   //Updates the 'shelf' property of already added books
   mapResults = (results, books) => {
     return results.map(book => {
-      let found = books.find(b => b.id == book.id);
+      let found = books.find(b => b.id === book.id);
       book.shelf = (found ? found.shelf : 'none');
       return book;
     })

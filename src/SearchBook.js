@@ -16,7 +16,7 @@ class SearchBook extends Component{
 
 	render(){
 
-		const { books, shelves, onChangeBookShelf, onSearchBooks, results } = this.props
+		const { shelves, onChangeBookShelf, onSearchBooks, results } = this.props
 
 		return(
 			
