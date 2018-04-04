@@ -34,7 +34,11 @@ class ListBooks extends Component{
 
                     <div className="book-top">
 
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+                    {book.imageLinks ? (
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+                    ):(
+                      <div className="book-cover"  style={{ width: 128, height: 193, backgroundColor: '#ccc' }}></div>
+                    )}
                    
                     <div className="book-shelf-changer">
                       <select onChange={(e) => onChangeBookShelf(book, e.target.value)} value={book.shelf}>

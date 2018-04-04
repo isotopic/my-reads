@@ -2,21 +2,38 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import ListBooks from './ListBooks'
+import { debounce } from "throttle-debounce";
 
 class SearchBook extends Component{
 
+	static propTypes = {
+		shelves: PropTypes.array.isRequired,
+		onChangeBookShelf: PropTypes.func.isRequired,
+		onSearchBooks: PropTypes.func.isRequired,
+		results: PropTypes.array
+	}
 
-  static propTypes = {
-    shelves: PropTypes.array.isRequired,
-    onChangeBookShelf: PropTypes.func.isRequired,
-    onSearchBooks: PropTypes.func.isRequired,
-    results: PropTypes.array
-  }
+	state = {
+		query: ''
+	}
+	
+	changeQuery = event => {
+		this.setState({ query: event.target.value }, () => {
+			this.searchThrottled(this.state.query)
+		});
+	}
 
+	search = () => {
+		this.props.onSearchBooks(this.state.query);
+	}
+
+	searchThrottled = debounce(600, q =>{
+		this.search(q)
+	});
 
 	render(){
 
-		const { shelves, onChangeBookShelf, onSearchBooks, results } = this.props
+		const { shelves, onChangeBookShelf, results } = this.props
 
 		return(
 			
@@ -30,7 +47,8 @@ class SearchBook extends Component{
 
 		            			<input type="text" 
 		            				placeholder="Search by title or author" 
-									onChange={ (event) => onSearchBooks(event.target.value) }
+									value={this.state.query}
+									onChange={this.changeQuery}
 								/>
 
 		        			</div>

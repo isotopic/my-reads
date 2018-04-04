@@ -52,6 +52,8 @@ class App extends Component {
           this.setState({ 'results': this.mapResults(results, this.state.books), 'isLoading': false })
         }
       })
+    }else{
+      this.setState({ 'results': [], 'isLoading': false })
     }
   }
 
@@ -81,7 +83,7 @@ class App extends Component {
         )}/>
 
         <Route path='/search' render={() => (
-          <SearchBook books={books} shelves={shelves} results={results} onChangeBookShelf={this.changeBookShelf} onSearchBooks={this.searchBooks}/>
+          <SearchBook results={results} shelves={shelves} onChangeBookShelf={this.changeBookShelf} onSearchBooks={this.searchBooks}/>
         )}/>
 
 	    </div>
